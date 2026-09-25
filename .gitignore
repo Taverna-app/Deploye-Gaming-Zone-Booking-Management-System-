@@ -1,0 +1,11 @@
+# Environment files
+/backend/.env
+/frontend/.env.production
+
+# Dependencies
+**/node_modules/
+
+# Logs
+**/logs/
+*.log
+
