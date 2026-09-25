@@ -9,7 +9,7 @@ module.exports = {
       // One instance only: the reminder scheduler and Socket.IO rooms live in this process.
       instances: 1,
       exec_mode: 'fork',
-      env: { NODE_ENV: 'production' }, // everything else comes from backend/.env
+      env: { NODE_ENV: 'development' }, // everything else comes from backend/.env
       max_memory_restart: '500M',
       time: true,
     },
