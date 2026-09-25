@@ -9,3 +9,6 @@
 **/logs/
 *.log
 
+
+# Server key
+*.ppk
