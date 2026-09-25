@@ -1,0 +1,33 @@
+import { Router } from 'express';
+import * as controller from '../controllers/superAdmin.controller.js';
+import { authenticate } from '../middleware/auth.middleware.js';
+import { authorize } from '../middleware/role.middleware.js';
+import { validate } from '../middleware/validation.middleware.js';
+import { idParamSchema } from '../validators/common.validator.js';
+import { createBusinessSchema, impersonateSchema, listBusinessesQuerySchema, updateBusinessSchema, } from '../validators/business.validator.js';
+import { dashboardQuerySchema, listAuditLogsQuerySchema, listUsersQuerySchema, updateSettingsSchema, } from '../validators/superAdmin.validator.js';
+import { exportLimiter, reportLimiter } from '../middleware/rateLimit.middleware.js';
+import { reportQuerySchema } from '../validators/report.validator.js';
+import * as paymentController from '../controllers/payment.controller.js';
+import { listAdminPaymentsQuerySchema } from '../validators/payment.validator.js';
+export const superAdminRouter = Router();
+// Every route below is platform-level: SUPER_ADMIN only (an impersonation token acts as a store admin, so it is refused).
+superAdminRouter.use(authenticate, authorize('SUPER_ADMIN'));
+superAdminRouter.get('/dashboard', validate(dashboardQuerySchema, 'query'), controller.dashboard);
+superAdminRouter.get('/reports', reportLimiter, validate(reportQuerySchema, 'query'), controller.platformReport);
+superAdminRouter.get('/reports/export', exportLimiter, validate(reportQuerySchema, 'query'), controller.exportPlatformReport);
+superAdminRouter.get('/businesses', validate(listBusinessesQuerySchema, 'query'), controller.listBusinesses);
+superAdminRouter.post('/businesses', validate(createBusinessSchema), controller.createBusiness);
+superAdminRouter.get('/businesses/:id', validate(idParamSchema, 'params'), controller.getBusiness);
+superAdminRouter.put('/businesses/:id', validate(idParamSchema, 'params'), validate(updateBusinessSchema), controller.updateBusiness);
+superAdminRouter.post('/businesses/:id/activate', validate(idParamSchema, 'params'), controller.activateBusiness);
+superAdminRouter.post('/businesses/:id/deactivate', validate(idParamSchema, 'params'), controller.deactivateBusiness);
+superAdminRouter.post('/businesses/:id/suspend', validate(idParamSchema, 'params'), controller.suspendBusiness);
+superAdminRouter.post('/businesses/:id/impersonate', validate(idParamSchema, 'params'), validate(impersonateSchema), controller.impersonate);
+superAdminRouter.get('/users', validate(listUsersQuerySchema, 'query'), controller.listUsers);
+superAdminRouter.get('/audit-logs', validate(listAuditLogsQuerySchema, 'query'), controller.listAuditLogs);
+superAdminRouter.get('/system-health', controller.systemHealth);
+superAdminRouter.get('/settings', controller.getSettings);
+superAdminRouter.put('/settings', validate(updateSettingsSchema), controller.updateSettings);
+superAdminRouter.get('/payments', validate(listAdminPaymentsQuerySchema, 'query'), paymentController.listAll);
+//# sourceMappingURL=superAdmin.routes.js.map

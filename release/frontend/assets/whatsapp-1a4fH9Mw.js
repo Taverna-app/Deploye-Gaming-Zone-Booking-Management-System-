@@ -1,0 +1,1 @@
+import{i as e}from"./button-9EdLB2Jk.js";var t={name:`message-circle`,size:24,node:[[`path`,{d:`M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719`,key:`1sd12s`}]]};t.node;var n=e(t);function r(e,t){let n=e?.replace(/\D/g,``);return n?`https://wa.me/${n}?text=${encodeURIComponent(t)}`:null}export{n,r as t};

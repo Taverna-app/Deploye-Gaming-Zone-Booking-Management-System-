@@ -1,0 +1,23 @@
+import { Router } from 'express';
+import { healthRouter } from './health.routes.js';
+import { authRouter } from './auth.routes.js';
+import { superAdminRouter } from './superAdmin.routes.js';
+import { adminRouter } from './admin.routes.js';
+import { publicRouter } from './public.routes.js';
+import { bookingRouter } from './booking.routes.js';
+import { customerRouter } from './customer.routes.js';
+import { notificationRouter } from './notification.routes.js';
+import { paymentRouter } from './payment.routes.js';
+import { cronRouter } from './cron.routes.js';
+export const apiRouter = Router();
+apiRouter.use('/health', healthRouter);
+apiRouter.use('/auth', authRouter);
+apiRouter.use('/super-admin', superAdminRouter);
+apiRouter.use('/admin', adminRouter);
+apiRouter.use('/public', publicRouter);
+apiRouter.use('/bookings', bookingRouter);
+apiRouter.use('/customer', customerRouter);
+apiRouter.use('/notifications', notificationRouter);
+apiRouter.use('/payments', paymentRouter);
+apiRouter.use('/cron', cronRouter);
+//# sourceMappingURL=index.js.map

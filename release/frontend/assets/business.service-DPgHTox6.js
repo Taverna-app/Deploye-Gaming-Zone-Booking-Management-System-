@@ -1,0 +1,1 @@
+import{At as e,jt as t}from"./index-BlQ3VBh_.js";var n={list:n=>t.page(`/public/businesses`,e(n)),get:e=>t.get(`/public/businesses/${e}`),reviews:(e,n=1)=>t.get(`/public/businesses/${e}/reviews`,{page:n,limit:6}),categories:e=>t.get(`/public/businesses/${e}/categories`),stations:(n,r)=>t.get(`/public/businesses/${n}/stations`,e({categoryId:r}))};export{n as t};
