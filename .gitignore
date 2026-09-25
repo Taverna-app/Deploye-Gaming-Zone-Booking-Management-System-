@@ -1,6 +1,6 @@
 # Environment files
-/backend/.env
-/frontend/.env.production
+/release/backend/.env
+/release/frontend/.env.production
 
 # Dependencies
 **/node_modules/
